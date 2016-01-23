@@ -1,0 +1,2 @@
+=RANDBETWEEN(90000,90100)
+=VLOOKUP(B3,'C:\Users\Deepak\Dropbox\Docs\EH\PHDI\Personalization\[TagIds.csv]TagIds'!$A:$B,2)
