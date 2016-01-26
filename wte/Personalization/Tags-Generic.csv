@@ -1,9 +1,9 @@
-tagid,tagname
-90201,Twins
-90202,Single Parent
-90203,Budget
-90204,Healthy Living
-90205,Winter
-90206,Summer
-90207,Christmas
-90208,Halloween
+tagid,tagname,tagenabled
+90201,Twins,1
+90202,Single Parent,1
+90203,Budget,1
+90204,Healthy Living,1
+90205,Winter,1
+90206,Summer,1
+90207,Christmas,1
+90208,Halloween,1

@@ -1,0 +1,5 @@
+actionid,action
+1,login
+2,app_open
+3,view_feed
+4,click_feed
