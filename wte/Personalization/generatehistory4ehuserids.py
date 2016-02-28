@@ -1,3 +1,4 @@
+import sys, getopt
 import csv
 import random
 import time
@@ -69,19 +70,26 @@ def processuser(userid):
 
     retlist = list();
 
-    localrand = random.randrange(1,10,1);
+    localrand = random.randrange(1,len(g_allcids),1);
 
     selectedcids = random.sample(g_allcids, localrand);
 
     for eachcid in selectedcids:
-        retlist.append(formathistoryrecordrow(userid, 
-                                        randomDate("1/1/2015 12:00 PM", "1/1/2016 12:00 PM", random.random()),
-                                        random.choice([3,4]),
-                                        eachcid,
-                                        random.choice([1,2])));
+      retlist.append(formathistoryrecordrow(userid, 
+                                randomDate("1/1/2016 12:00 PM", "2/1/2016 12:00 PM", random.random()),
+                                random.choice([3,4]),
+                                eachcid,
+                                random.choice([1,2])));
 
     return retlist;
 
+
+def readaslist(filename):
+    allcids = list();
+    with open(filename) as cidfile:
+        for cid in cidfile:
+            allcids.append(int(cid.strip()));
+    return allcids;
 
 def readtagsasdict(filename):
     tags = {};
@@ -92,12 +100,13 @@ def readtagsasdict(filename):
                 tags[row['tagid']] = row;
     return tags;
 
-def readaslist(filename):
-    allcids = list();
-    with open(filename) as cidfile:
-        for cid in cidfile:
-            allcids.append(int(cid.strip()));
-    return allcids;
+def readtags(filename):
+    tags = list();
+    with open(filename) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            tags.append(row['tagid']);
+    return tags;
 
 def readpregnancytags(filename):
     tags = {};
@@ -108,47 +117,95 @@ def readpregnancytags(filename):
     return tags;
 
 
-print randomDate("1/1/2015 12:00 PM", "1/1/2016 12:00 PM", random.random())
+    
+
+def usage():
+  print('generatehistory4ehuserids.py -c <cidfile> -u <uidfile> -o <outputfile> -r <refdir>')
+  sys.exit(2)
+  
+def main(argv):
+  cidfile = ''
+  uidfile = ''
+  outputfile = ''
+  refdir = ''
+  if( len(argv) == 0):
+    usage()
+  try:
+    opts, args = getopt.getopt(argv,"hc:u:o:r:",["cfile=","ufile=","ofile=","refdir="])
+  except getopt.GetoptError:
+    usage()
+  
+  for opt, arg in opts:
+    if opt == '-h':
+      usage()
+    elif opt in ("-c", "--cfile"):
+      cidfile = arg
+    elif opt in ("-u", "--ufile"):
+      uidfile = arg
+    elif opt in ("-r", "--refdir"):
+      refdir = arg
+    elif opt in ("-o", "--ofile"):
+      outputfile = arg
+  
+  print('Content file is %s ' % cidfile)
+  if(len(cidfile) == 0):
+    usage()
+  print('User file is %s ' % uidfile)
+  if(len(uidfile) == 0):
+    usage()
+  print('Output file is %s ' % outputfile)
+  if(len(outputfile) == 0):
+    usage()
+  print('Ref Dir is %s ' % refdir)
+  if(len(refdir) == 0):
+    rdir = '.\\'
+
+  start_time = time.time();
+
+  global g_i
+  g_i = 1;
+  global mode_tags
+  mode_tags = readtagsasdict(rdir + 'Tags-Modes.csv');
+  global mode_keys
+  mode_keys = mode_tags.keys();
+  global w_tags
+  w_tags = readpregnancytags(rdir + 'Tags-Pregnancy.csv');
+  global w_keys
+  w_keys = w_tags.keys();
+  global b_tags
+  b_tags = readtagsasdict(rdir + 'Tags-Toddler.csv');
+  global b_keys
+  b_keys = b_tags.keys();
+  global g_tags
+  g_tags = readtagsasdict(rdir + 'Tags-Generic.csv');
+  global g_keys
+  g_keys = g_tags.keys();
+
+  print randomDate("1/1/2015 12:00 PM", "1/1/2016 12:00 PM", random.random())
+
+  global g_allcids
+  g_allcids = readaslist(cidfile);
+
+  #with open('userids.txt') as csvfile:
+      #reader = csv.DictReader(csvfile)
+      #for row in reader:
+          #print(row['userid']);
+          #print(processuser(row['userid']));
 
 
-g_allcids = readaslist("C:\\Projects\\GitHub\\python\\wte\\Personalization\\allcontentids.csv");
-
-
-
-mode_tags = {}
-mode_tags = readtagsasdict('Tags-Modes.csv');
-mode_keys = mode_tags.keys();
-w_tags = {}
-w_tags = readpregnancytags('Tags-Pregnancy.csv');
-w_keys = w_tags.keys();
-b_tags = {}
-b_tags = readtagsasdict('Tags-Toddler.csv');
-b_keys = b_tags.keys();
-g_tags = {}
-g_tags = readtagsasdict('Tags-Generic.csv');
-g_keys = g_tags.keys();
-
-#with open('userids.txt') as csvfile:
-    #reader = csv.DictReader(csvfile)
-    #for row in reader:
-        #print(row['userid']);
-        #print(processuser(row['userid']));
-
-
-g_i = 1;
-start_time = time.time();
-
-with open("userhistory-output.csv", "wb") as f:
+  with open(outputfile, "wb") as f:
     writer = csv.writer(f)
-    with open("C:\\Projects\\GitHub\\python\\wte\\Personalization\\allehuserids.csv") as infile:
-        for userid in infile:
-            ret = processuser(int(userid.strip()));
-            # print ret;
-            writer.writerows(ret)
-#             g_i += 1;
+    #with open("C:\\Projects\\GitHub\\python\\wte\\Personalization\\allehuserids.csv") as infile:
+    with open(uidfile) as infile:
+      for userid in infile:
+        ret = processuser(int(userid.strip()));
+        writer.writerows(ret)
+        g_i += 1;
 
 
-print('time taken = %s seconds ' %(time.time() - start_time) )
+  print('time taken = %s seconds ' %(time.time() - start_time) )
 
 
 
+if __name__ == "__main__":
+   main(sys.argv[1:])

@@ -1,3 +1,4 @@
+import sys, getopt
 import csv
 import random
 import time
@@ -5,7 +6,7 @@ import time
 def formatrecordrow(u, a,b='-'):
     return [u,a,b];
 
-def assigninterests(cid) :
+def assigninterests(cid, mode) :
     retlist = list();
     if(not bool(g_keys)):
         return
@@ -19,27 +20,28 @@ def assigntags(cid, mode) :
     smode = mode_tags[mode]['tagname'];
     #print(mode)
     if(smode=='Pregnancy') :
-        week = 'w' + str(random.randrange(1,45,1));
-        wtagid = w_tags[week]['wtagid']; 
-        month = w_tags[week]['month'];
-        mtagid = w_tags[week]['mtagid']; 
-        trimester = w_tags[week]['trimester'];
-        ttagid = w_tags[week]['ttagid']; 
 
+      localrand = random.randrange(1,10,1);
+
+      week = 'w' + str(random.randrange(1,45,1));
+      wtagid = w_tags[week]['wtagid']; 
+      month = w_tags[week]['month'];
+      mtagid = w_tags[week]['mtagid']; 
+      trimester = w_tags[week]['trimester'];
+      ttagid = w_tags[week]['ttagid']; 
+
+      if( (localrand%7)==0 ):
+        retlist.append(formatrecordrow(cid, int(wtagid), week));
+      if( (localrand%3)==0 ):
         retlist.append(formatrecordrow(cid, int(ttagid), trimester));
-
-        localrand = random.randrange(1,10,1);
-        if( (localrand%3)==0 ):
-            retlist.append(formatrecordrow(cid, int(mtagid), month));
-        if( (localrand%5)==0 ):
-            retlist.append(formatrecordrow(cid, int(mtagid), month));
-            retlist.append(formatrecordrow(cid, int(wtagid), week));
+      if( (localrand%5)==0 ):
+        retlist.append(formatrecordrow(cid, int(mtagid), month));
     
     if(smode=='Baby') :
-        if( not bool(b_keys)):
-            return;
-        year = random.choice(b_keys);
-        retlist.append(formatrecordrow(cid, year));
+      if( not bool(b_keys)):
+          return;
+      year = random.choice(b_keys);
+      retlist.append(formatrecordrow(cid, year));
 
     retlist.append(formatrecordrow(cid, mode));
     return retlist;
@@ -50,14 +52,13 @@ def processcontent(cid):
 
     retlist = list();
 
-    if( (g_i % 4)==0 ):
+    if( (g_i % 7)==0 ):
         mode = random.choice(mode_keys)
     else:
         mode = '90000';
     # print(g_i)
     retlist = assigntags(cid, mode);
-    retlist.extend(assigninterests(cid));
-    # retlist.extend(assigninterests(userid));
+    retlist.extend(assigninterests(cid, mode));
     return retlist;
     #, assigninterests(mode)];
 
@@ -86,18 +87,72 @@ def readpregnancytags(filename):
             tags[row['week']] = row;
     return tags;
 
-mode_tags = {}
-mode_tags = readtagsasdict('Tags-Modes.csv');
-mode_keys = mode_tags.keys();
-w_tags = {}
-w_tags = readpregnancytags('Tags-Pregnancy.csv');
-w_keys = w_tags.keys();
-b_tags = {}
-b_tags = readtagsasdict('Tags-Toddler.csv');
-b_keys = b_tags.keys();
-g_tags = {}
-g_tags = readtagsasdict('Tags-Generic.csv');
-g_keys = g_tags.keys();
+def usage():
+  print('generatetags4contentids.py -i <inputfile> -r <refdir> -o <outputfile>')
+  sys.exit(2)
+
+def main(argv):
+  inputfile = ''
+  outputfile = ''
+  refdir = ''
+  if( len(argv) == 0):
+    usage()
+  try:
+    opts, args = getopt.getopt(argv,"hi:o:r:",["ifile=","ofile=","refdir="])
+  except getopt.GetoptError:
+    usage()
+  
+  for opt, arg in opts:
+    if opt == '-h':
+      usage()
+    elif opt in ("-i", "--ifile"):
+      inputfile = arg
+    elif opt in ("-r", "--refdir"):
+      refdir = arg
+    elif opt in ("-o", "--ofile"):
+      outputfile = arg
+  
+  print('Input file is %s ' % inputfile)
+  if(len(inputfile) == 0):
+    usage()
+  print('Output file is %s ' % outputfile)
+  if(len(outputfile) == 0):
+    usage()
+  print('Ref Dir is %s ' % refdir)
+  if(len(refdir) == 0):
+    rdir = '.\\'
+
+  start_time = time.time();
+
+  global g_i
+  g_i = 1;
+  global mode_tags
+  mode_tags = readtagsasdict(rdir + 'Tags-Modes.csv');
+  global mode_keys
+  mode_keys = mode_tags.keys();
+  global w_tags
+  w_tags = readpregnancytags(rdir + 'Tags-Pregnancy.csv');
+  global w_keys
+  w_keys = w_tags.keys();
+  global b_tags
+  b_tags = readtagsasdict(rdir + 'Tags-Toddler.csv');
+  global b_keys
+  b_keys = b_tags.keys();
+  global g_tags
+  g_tags = readtagsasdict(rdir + 'Tags-Generic.csv');
+  global g_keys
+  g_keys = g_tags.keys();
+
+  with open(outputfile, "wb") as f:
+      writer = csv.writer(f)
+      #with open("C:\\Projects\\GitHub\\python\\wte\\Personalization\\allcontentids.csv") as infile:
+      with open(inputfile) as infile:
+          for cid in infile:
+              ret = processcontent(int(cid.strip()));
+              writer.writerows(ret)
+              g_i += 1;
+
+  print('time taken = %s seconds ' %(time.time() - start_time) )
 
 #with open('userids.txt') as csvfile:
     #reader = csv.DictReader(csvfile)
@@ -106,29 +161,5 @@ g_keys = g_tags.keys();
         #print(processuser(row['userid']));
 
 
-g_i = 1;
-start_time = time.time();
-
-# with open("output.csv", "wb") as f:
-#     writer = csv.writer(f)
-#     for i in range(1, 100):
-#         ruid = random.randrange(100000);
-#         ret = processuser(ruid);
-#         # print(ret);
-#         writer.writerows(ret)
-#         g_i += 1;
-
-# print('time taken = %s seconds ' %(time.time() - start_time) )
-# exit();
-
-with open("c2tags-output.csv", "wb") as f:
-    writer = csv.writer(f)
-    with open("C:\\Projects\\GitHub\\python\\wte\\Personalization\\allcontentids.csv") as infile:
-        for cid in infile:
-            ret = processcontent(int(cid.strip()));
-            #print ret;
-            writer.writerows(ret)
-            g_i += 1;
-
-
-print('time taken = %s seconds ' %(time.time() - start_time) )
+if __name__ == "__main__":
+   main(sys.argv[1:])
