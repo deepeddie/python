@@ -7,9 +7,9 @@ from boto3.session import Session
 from datetime import datetime
 
 # AWS_ACCESS_KEY_ID
-AKID='AKIAJLYZRTT6VDRFCSBQ'
+AKID=''
 # AWS_SECRET_ACCESS_KEY
-ASAK='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'
+ASAK=''
 # Region string
 REGION='us-east-1'
 
