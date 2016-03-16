@@ -46,6 +46,8 @@ def calc_week(due_date):
 
     allthedates.month_of_preg = month[1:]
     allthedates.trimester_of_preg = trimester[1:]
+    # tags
+    allthedates.tags = [mtagid, ttagid, 90000]
 
     return allthedates
 
@@ -55,7 +57,8 @@ def main():
 
     dd1 = date(2016, 6, 13)
     atd = calc_week(dd1)
-    
+
+    print('The Computer')
     print('Today\'s Date : ' + str(atd.today_date))
     print('Due Date : ' + str(atd.due_date))
     print('Conception Date : ' + str(atd.concept_date))
@@ -68,6 +71,8 @@ def main():
     print('You are in month ' + str(atd.month_of_preg) + ' of pregnancy and in trimester ' 
     + str(atd.trimester_of_preg) + ' of pregnancy')
     
+    print('Tagids used for this user - ')
+    print(','.join(str(x) for x in atd.tags))
   
 main()
 

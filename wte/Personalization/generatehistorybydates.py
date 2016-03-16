@@ -39,12 +39,12 @@ def processdate(sDate):
 
   for eachuid in selecteduids:
     vwcount = 0
-    cidcount = random.randrange(1,15,1);
+    cidcount = random.randrange(1,5,1);
     selectedcids = random.sample(g_allcids, cidcount);
     for eachcid in selectedcids:
       vwcount = vwcount + 1
-      # every 7th content gets a tap event
-      if( (vwcount % 7)==0 ):
+      # every 4th content gets a tap event
+      if( (vwcount % 4)==0 ):
         retlist.append(formathistoryrecordrow(eachuid, sDate, 3, eachcid, 1));
         retlist.append(formathistoryrecordrow(eachuid, sDate, 4, eachcid, 1));
       else:
