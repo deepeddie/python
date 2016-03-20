@@ -4,7 +4,8 @@ import csv
 import random
 import time
 from datetime import timedelta, date, datetime
-from multiprocessing import Pool
+from multiprocessing import Pool, Array, Process
+import mymodule
 
 def strTimeProp(start, end, format, prop):
     """Get a time at a proportion of a range of two formatted times.
@@ -105,7 +106,11 @@ def readpregnancytags(filename):
 
 
     
-
+def initProcess(all_uids, all_cids):
+  mymodule.all_uids = all_uids
+  mymodule.all_cids = all_cids
+  
+    
 def usage():
   print('generatehistorybydates.py -c <cidfile> -u <uidfile> -d <#ofdays> -s <startdate(mm-dd-YYYY)> -o <outputfile> -r <refdir>')
   sys.exit(2)
@@ -174,13 +179,24 @@ def main(argv):
 
   global g_allcids
   g_allcids = readaslist(cidfile);
+  g_allcids_shared = Array('i',g_allcids, lock=False)
 
   global g_alluids
   g_alluids = readaslist(uidfile);
+  g_alluids_shared = Array('i',g_alluids, lock=False)
+  
+  # for eachdate in date_list:
+    # ret = processdate(eachdate.strftime("%m/%d/%Y"),cidfile,uidfile);
 
-  for eachdate in date_list:
-    ret = processdate(eachdate,cidfile,uidfile, outputfile);
-
+  retlist = {}
+  pool = Pool(initializer=initProcess, initargs=(g_alluids_shared, g_allcids_shared,))
+  
+  for onedate in date_list:
+    retlist[onedate] = pool.apply_async(processdate, (onedate, cidfile, uidfile, outputfile, ));
+  
+  for eachdate in retlist:
+    ret = retlist[eachdate].get()
+    
   print('time taken = %s seconds ' %(time.time() - start_time) )
 
 
