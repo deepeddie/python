@@ -1,0 +1,760 @@
+<html>
+<head>
+</head>
+<script>
+	alltags = '{\
+		"1":{"w1":90464,"m":1,"m1":90506,"t":1,"t1":90457},\
+		"2":{"w2":90465,"m":1,"m1":90506,"t":1,"t1":90457},\
+		"3":{"w3":90466,"m":1,"m1":90506,"t":1,"t1":90457},\
+		"4":{"w4":90467,"m":1,"m1":90506,"t":1,"t1":90457},\
+		"5":{"w5":90468,"m":2,"m2":90507,"t":1,"t1":90457},\
+		"6":{"w6":90469,"m":2,"m2":90507,"t":1,"t1":90457},\
+		"7":{"w7":90470,"m":2,"m2":90507,"t":1,"t1":90457},\
+		"8":{"w8":90471,"m":2,"m2":90507,"t":1,"t1":90457},\
+		"9":{"w9":90472,"m":3,"m3":90508,"t":1,"t1":90457},\
+		"10":{"w10":90473,"m":3,"m3":90508,"t":1,"t1":90457},\
+		"11":{"w11":90474,"m":3,"m3":90508,"t":1,"t1":90457},\
+		"12":{"w12":90475,"m":3,"m3":90508,"t":1,"t1":90457},\
+		"13":{"w13":90476,"m":3,"m3":90508,"t":1,"t1":90457},\
+		"14":{"w14":90477,"m":4,"m4":90509,"t":2,"t2":90458},\
+		"15":{"w15":90478,"m":4,"m4":90509,"t":2,"t2":90458},\
+		"16":{"w16":90479,"m":4,"m4":90509,"t":2,"t2":90458},\
+		"17":{"w17":90480,"m":4,"m4":90509,"t":2,"t2":90458},\
+		"18":{"w18":90481,"m":5,"m5":90510,"t":2,"t2":90458},\
+		"19":{"w19":90482,"m":5,"m5":90510,"t":2,"t2":90458},\
+		"20":{"w20":90483,"m":5,"m5":90510,"t":2,"t2":90458},\
+		"21":{"w21":90484,"m":5,"m5":90510,"t":2,"t2":90458},\
+		"22":{"w22":90485,"m":5,"m5":90510,"t":2,"t2":90458},\
+		"23":{"w23":90486,"m":6,"m6":90511,"t":2,"t2":90458},\
+		"24":{"w24":90487,"m":6,"m6":90511,"t":2,"t2":90458},\
+		"25":{"w25":90488,"m":6,"m6":90511,"t":2,"t2":90458},\
+		"26":{"w26":90489,"m":6,"m6":90511,"t":2,"t2":90458},\
+		"27":{"w27":90490,"m":6,"m6":90511,"t":2,"t2":90458},\
+		"28":{"w28":90491,"m":7,"m7":90512,"t":3,"t3":90459},\
+		"29":{"w29":90492,"m":7,"m7":90512,"t":3,"t3":90459},\
+		"30":{"w30":90493,"m":7,"m7":90512,"t":3,"t3":90459},\
+		"31":{"w31":90494,"m":7,"m7":90512,"t":3,"t3":90459},\
+		"32":{"w32":90495,"m":8,"m8":90513,"t":3,"t3":90459},\
+		"33":{"w33":90496,"m":8,"m8":90513,"t":3,"t3":90459},\
+		"34":{"w34":90497,"m":8,"m8":90513,"t":3,"t3":90459},\
+		"35":{"w35":90498,"m":8,"m8":90513,"t":3,"t3":90459},\
+		"36":{"w36":90499,"m":9,"m9":90514,"t":3,"t3":90459},\
+		"37":{"w37":90500,"m":9,"m9":90514,"t":3,"t3":90459},\
+		"38":{"w38":90501,"m":9,"m9":90514,"t":3,"t3":90459},\
+		"39":{"w39":90502,"m":9,"m9":90514,"t":3,"t3":90459},\
+		"40":{"w40":90503,"m":9,"m9":90514,"t":3,"t3":90459},\
+		"41":{"w41":90504,"m":9,"m9":90514,"t":3,"t3":90459},\
+		"42":{"w42":90505,"m":9,"m9":90514,"t":3,"t3":90459}\
+		}';
+		var alltagsbyweek = {}
+		alltagsbyweek = JSON.parse(alltags)
+</script>
+<script>
+	alltagnames = '{\
+		"90000":{"name":"base","type":"na"},\
+		"90262":{"name":"prg","type":"c"},\
+		"90263":{"name":"fy","type":"c"},\
+		"90264":{"name":"tdlr","type":"c"},\
+		"90265":{"name":"fam","type":"c"},\
+		"90266":{"name":"prec","type":"c"},\
+		"90365":{"name":"celeb","type":"c"},\
+		"90391":{"name":"g","type":"sc"},\
+		"90392":{"name":"g","type":"sc"},\
+		"90393":{"name":"g","type":"sc"},\
+		"90394":{"name":"g","type":"sc"},\
+		"90395":{"name":"g","type":"sc"},\
+		"90396":{"name":"g","type":"sc"},\
+		"90397":{"name":"g","type":"sc"},\
+		"90398":{"name":"g","type":"sc"},\
+		"90399":{"name":"g","type":"sc"},\
+		"90400":{"name":"g","type":"sc"},\
+		"90401":{"name":"g","type":"sc"},\
+		"90402":{"name":"g","type":"sc"},\
+		"90403":{"name":"g","type":"sc"},\
+		"90404":{"name":"g","type":"sc"},\
+		"90405":{"name":"g","type":"sc"},\
+		"90406":{"name":"g","type":"sc"},\
+		"90407":{"name":"g","type":"sc"},\
+		"90408":{"name":"g","type":"sc"},\
+		"90409":{"name":"g","type":"sc"},\
+		"90410":{"name":"g","type":"sc"},\
+		"90411":{"name":"g","type":"sc"},\
+		"90412":{"name":"g","type":"sc"},\
+		"90413":{"name":"g","type":"sc"},\
+		"90414":{"name":"g","type":"sc"},\
+		"90415":{"name":"g","type":"sc"},\
+		"90416":{"name":"g","type":"sc"},\
+		"90417":{"name":"g","type":"sc"},\
+		"90418":{"name":"g","type":"sc"},\
+		"90419":{"name":"g","type":"sc"},\
+		"90420":{"name":"g","type":"sc"},\
+		"90421":{"name":"g","type":"sc"},\
+		"90422":{"name":"g","type":"sc"},\
+		"90423":{"name":"g","type":"sc"},\
+		"90424":{"name":"g","type":"sc"},\
+		"90425":{"name":"g","type":"sc"},\
+		"90426":{"name":"g","type":"sc"},\
+		"90427":{"name":"g","type":"sc"},\
+		"90428":{"name":"g","type":"sc"},\
+		"90429":{"name":"g","type":"sc"},\
+		"90430":{"name":"g","type":"sc"},\
+		"90431":{"name":"g","type":"sc"},\
+		"90432":{"name":"g","type":"sc"},\
+		"90433":{"name":"g","type":"sc"},\
+		"90434":{"name":"g","type":"sc"},\
+		"90435":{"name":"g","type":"sc"},\
+		"90436":{"name":"g","type":"sc"},\
+		"90437":{"name":"g","type":"sc"},\
+		"90438":{"name":"g","type":"sc"},\
+		"90439":{"name":"g","type":"sc"},\
+		"90440":{"name":"g","type":"sc"},\
+		"90441":{"name":"g","type":"sc"},\
+		"90442":{"name":"g","type":"sc"},\
+		"90443":{"name":"g","type":"sc"},\
+		"90444":{"name":"g","type":"sc"},\
+		"90445":{"name":"g","type":"sc"},\
+		"90446":{"name":"g","type":"sc"},\
+		"90447":{"name":"g","type":"g"},\
+		"90448":{"name":"g","type":"g"},\
+		"90449":{"name":"g","type":"g"},\
+		"90450":{"name":"g","type":"g"},\
+		"90451":{"name":"g","type":"g"},\
+		"90452":{"name":"g","type":"g"},\
+		"90453":{"name":"g","type":"se"},\
+		"90454":{"name":"g","type":"se"},\
+		"90455":{"name":"g","type":"se"},\
+		"90456":{"name":"g","type":"se"},\
+		"90457":{"name":"trm1","type":"trm"},\
+		"90458":{"name":"trm2","type":"trm"},\
+		"90459":{"name":"trm3","type":"trm"},\
+		"90460":{"name":"g","type":"g"},\
+		"90461":{"name":"g","type":"g"},\
+		"90462":{"name":"g","type":"g"},\
+		"90463":{"name":"g","type":"g"},\
+		"90464":{"name":"wk1","type":"wk"},\
+		"90465":{"name":"wk2","type":"wk"},\
+		"90466":{"name":"wk3","type":"wk"},\
+		"90467":{"name":"wk4","type":"wk"},\
+		"90468":{"name":"wk5","type":"wk"},\
+		"90469":{"name":"wk6","type":"wk"},\
+		"90470":{"name":"wk7","type":"wk"},\
+		"90471":{"name":"wk8","type":"wk"},\
+		"90472":{"name":"wk9","type":"wk"},\
+		"90473":{"name":"wk10","type":"wk"},\
+		"90474":{"name":"wk11","type":"wk"},\
+		"90475":{"name":"wk12","type":"wk"},\
+		"90476":{"name":"wk13","type":"wk"},\
+		"90477":{"name":"wk14","type":"wk"},\
+		"90478":{"name":"wk15","type":"wk"},\
+		"90479":{"name":"wk16","type":"wk"},\
+		"90480":{"name":"wk17","type":"wk"},\
+		"90481":{"name":"wk18","type":"wk"},\
+		"90482":{"name":"wk19","type":"wk"},\
+		"90483":{"name":"wk20","type":"wk"},\
+		"90484":{"name":"wk21","type":"wk"},\
+		"90485":{"name":"wk22","type":"wk"},\
+		"90486":{"name":"wk23","type":"wk"},\
+		"90487":{"name":"wk24","type":"wk"},\
+		"90488":{"name":"wk25","type":"wk"},\
+		"90489":{"name":"wk26","type":"wk"},\
+		"90490":{"name":"wk27","type":"wk"},\
+		"90491":{"name":"wk28","type":"wk"},\
+		"90492":{"name":"wk29","type":"wk"},\
+		"90493":{"name":"wk30","type":"wk"},\
+		"90494":{"name":"wk31","type":"wk"},\
+		"90495":{"name":"wk32","type":"wk"},\
+		"90496":{"name":"wk33","type":"wk"},\
+		"90497":{"name":"wk34","type":"wk"},\
+		"90498":{"name":"wk35","type":"wk"},\
+		"90499":{"name":"wk36","type":"wk"},\
+		"90500":{"name":"wk37","type":"wk"},\
+		"90501":{"name":"wk38","type":"wk"},\
+		"90502":{"name":"wk39","type":"wk"},\
+		"90503":{"name":"wk40","type":"wk"},\
+		"90504":{"name":"wk41","type":"wk"},\
+		"90505":{"name":"wk42","type":"wk"},\
+		"90506":{"name":"mnt1","type":"mnt"},\
+		"90507":{"name":"mnt2","type":"mnt"},\
+		"90508":{"name":"mnt3","type":"mnt"},\
+		"90509":{"name":"mnt4","type":"mnt"},\
+		"90510":{"name":"mnt5","type":"mnt"},\
+		"90511":{"name":"mnt6","type":"mnt"},\
+		"90512":{"name":"mnt7","type":"mnt"},\
+		"90513":{"name":"mnt8","type":"mnt"},\
+		"90514":{"name":"mnt9","type":"mnt"},\
+		"90515":{"name":"tdlrw1","type":"tdlr"},\
+		"90516":{"name":"tdlrw2","type":"tdlr"},\
+		"90517":{"name":"tdlrw3","type":"tdlr"},\
+		"90518":{"name":"tdlrw4","type":"tdlr"},\
+		"90519":{"name":"tdlrw5","type":"tdlr"},\
+		"90520":{"name":"tdlrw6","type":"tdlr"},\
+		"90521":{"name":"tdlrw7","type":"tdlr"},\
+		"90522":{"name":"tdlrw8","type":"tdlr"},\
+		"90523":{"name":"tdlrw9","type":"tdlr"},\
+		"90524":{"name":"tdlrw10","type":"tdlr"},\
+		"90525":{"name":"tdlrw11","type":"tdlr"},\
+		"90526":{"name":"tdlrw12","type":"tdlr"},\
+		"90527":{"name":"tdlrm1","type":"tdlr"},\
+		"90528":{"name":"tdlrm2","type":"tdlr"},\
+		"90529":{"name":"tdlrm3","type":"tdlr"},\
+		"90530":{"name":"tdlrm4","type":"tdlr"},\
+		"90531":{"name":"tdlrm5","type":"tdlr"},\
+		"90532":{"name":"tdlrm6","type":"tdlr"},\
+		"90533":{"name":"tdlrm7","type":"tdlr"},\
+		"90534":{"name":"tdlrm8","type":"tdlr"},\
+		"90535":{"name":"tdlrm9","type":"tdlr"},\
+		"90536":{"name":"tdlrm10","type":"tdlr"},\
+		"90537":{"name":"tdlrm11","type":"tdlr"},\
+		"90538":{"name":"tdlrm12","type":"tdlr"},\
+		"90539":{"name":"tdlrm13","type":"tdlr"},\
+		"90540":{"name":"tdlrm14","type":"tdlr"},\
+		"90541":{"name":"tdlrm15","type":"tdlr"},\
+		"90542":{"name":"tdlrm16","type":"tdlr"},\
+		"90543":{"name":"tdlrm17","type":"tdlr"},\
+		"90544":{"name":"tdlrm18","type":"tdlr"},\
+		"90545":{"name":"tdlrm19","type":"tdlr"},\
+		"90546":{"name":"tdlrm20","type":"tdlr"},\
+		"90547":{"name":"tdlrm21","type":"tdlr"},\
+		"90548":{"name":"tdlrm22","type":"tdlr"},\
+		"90549":{"name":"tdlrm23","type":"tdlr"},\
+		"90550":{"name":"tdlrm24","type":"tdlr"},\
+		"90551":{"name":"tdlry2","type":"tdlr"},\
+		"90552":{"name":"tdlry3","type":"tdlr"},\
+		"90553":{"name":"tdlr","type":"tdlr"},\
+		"90554":{"name":"tdlr","type":"tdlr"},\
+		"90555":{"name":"tdlr","type":"tdlr"},\
+		"90556":{"name":"evg","type":"g"},\
+		"90557":{"name":"news","type":"g"},\
+		"90558":{"name":"g","type":"g"},\
+		"90559":{"name":"askh","type":"g"},\
+		"90560":{"name":"vdo","type":"g"},\
+		"90561":{"name":"infog","type":"g"},\
+		"90562":{"name":"g","type":"g"},\
+		"90563":{"name":"g","type":"g"},\
+		"90564":{"name":"g","type":"g"},\
+		"90565":{"name":"g","type":"g"},\
+		"90566":{"name":"g","type":"g"},\
+		"90567":{"name":"g","type":"g"},\
+		"90568":{"name":"g","type":"g"},\
+		"90569":{"name":"g","type":"g"},\
+		"90570":{"name":"g","type":"g"},\
+		"90571":{"name":"g","type":"g"},\
+		"90572":{"name":"g","type":"g"},\
+		"90573":{"name":"g","type":"g"},\
+		"90574":{"name":"g","type":"g"},\
+		"90575":{"name":"g","type":"g"},\
+		"90576":{"name":"g","type":"g"},\
+		"90577":{"name":"g","type":"g"},\
+		"90578":{"name":"g","type":"g"},\
+		"90579":{"name":"g","type":"g"},\
+		"90580":{"name":"g","type":"g"},\
+		"90581":{"name":"g","type":"g"},\
+		"90582":{"name":"g","type":"g"},\
+		"90583":{"name":"g","type":"g"},\
+		"90584":{"name":"g","type":"g"},\
+		"90585":{"name":"g","type":"g"},\
+		"90586":{"name":"g","type":"g"},\
+		"90587":{"name":"g","type":"g"},\
+		"90588":{"name":"g","type":"g"},\
+		"90589":{"name":"g","type":"g"},\
+		"90590":{"name":"g","type":"g"},\
+		"90591":{"name":"g","type":"g"},\
+		"90592":{"name":"g","type":"g"},\
+		"90593":{"name":"g","type":"g"},\
+		"90594":{"name":"g","type":"g"},\
+		"90596":{"name":"g","type":"g"},\
+		"90597":{"name":"g","type":"g"},\
+		"90598":{"name":"g","type":"g"},\
+		"90599":{"name":"g","type":"g"},\
+		"90600":{"name":"g","type":"g"},\
+		"90601":{"name":"g","type":"g"},\
+		"90602":{"name":"g","type":"g"},\
+		"90603":{"name":"g","type":"g"},\
+		"90604":{"name":"g","type":"g"},\
+		"90605":{"name":"g","type":"g"},\
+		"90606":{"name":"g","type":"g"},\
+		"90607":{"name":"g","type":"g"},\
+		"90608":{"name":"g","type":"g"},\
+		"90609":{"name":"g","type":"g"},\
+		"90610":{"name":"g","type":"g"},\
+		"90611":{"name":"g","type":"g"},\
+		"90612":{"name":"g","type":"g"},\
+		"90613":{"name":"g","type":"g"},\
+		"90614":{"name":"g","type":"g"},\
+		"90615":{"name":"g","type":"g"},\
+		"90616":{"name":"g","type":"g"},\
+		"90617":{"name":"g","type":"g"},\
+		"90618":{"name":"g","type":"g"},\
+		"90619":{"name":"g","type":"g"},\
+		"90620":{"name":"g","type":"g"},\
+		"90621":{"name":"g","type":"g"},\
+		"90622":{"name":"g","type":"g"},\
+		"90623":{"name":"g","type":"g"},\
+		"90625":{"name":"g","type":"g"},\
+		"90626":{"name":"g","type":"g"},\
+		"90627":{"name":"g","type":"g"},\
+		"90628":{"name":"g","type":"g"},\
+		"90630":{"name":"g","type":"g"},\
+		"90631":{"name":"g","type":"g"},\
+		"90632":{"name":"g","type":"g"},\
+		"90633":{"name":"g","type":"g"},\
+		"90634":{"name":"g","type":"g"},\
+		"90635":{"name":"g","type":"g"},\
+		"90636":{"name":"g","type":"g"},\
+		"90637":{"name":"g","type":"g"},\
+		"90638":{"name":"g","type":"g"},\
+		"90639":{"name":"g","type":"g"},\
+		"90640":{"name":"g","type":"g"},\
+		"90641":{"name":"g","type":"g"},\
+		"90642":{"name":"g","type":"g"},\
+		"90643":{"name":"g","type":"g"},\
+		"90644":{"name":"g","type":"g"},\
+		"90645":{"name":"g","type":"g"},\
+		"90646":{"name":"g","type":"g"},\
+		"90647":{"name":"g","type":"g"},\
+		"90648":{"name":"g","type":"g"},\
+		"90649":{"name":"g","type":"g"},\
+		"90650":{"name":"g","type":"g"},\
+		"90651":{"name":"g","type":"g"},\
+		"90652":{"name":"g","type":"g"},\
+		"90653":{"name":"g","type":"g"},\
+		"90654":{"name":"g","type":"g"},\
+		"90655":{"name":"g","type":"g"},\
+		"90656":{"name":"g","type":"g"},\
+		"90657":{"name":"g","type":"g"},\
+		"90658":{"name":"g","type":"g"},\
+		"90659":{"name":"g","type":"g"},\
+		"90660":{"name":"g","type":"g"},\
+		"90661":{"name":"g","type":"g"},\
+		"90662":{"name":"g","type":"g"},\
+		"90663":{"name":"g","type":"g"},\
+		"90664":{"name":"g","type":"g"},\
+		"90665":{"name":"g","type":"g"},\
+		"90666":{"name":"g","type":"g"},\
+		"90667":{"name":"g","type":"g"},\
+		"90668":{"name":"g","type":"g"},\
+		"90669":{"name":"g","type":"g"},\
+		"90670":{"name":"g","type":"g"},\
+		"90671":{"name":"g","type":"g"},\
+		"90672":{"name":"g","type":"g"},\
+		"90673":{"name":"g","type":"g"},\
+		"90674":{"name":"g","type":"g"},\
+		"90675":{"name":"g","type":"g"},\
+		"90676":{"name":"g","type":"g"},\
+		"90677":{"name":"g","type":"g"},\
+		"90678":{"name":"g","type":"g"},\
+		"90679":{"name":"g","type":"g"},\
+		"90680":{"name":"g","type":"g"},\
+		"90681":{"name":"g","type":"g"},\
+		"90682":{"name":"g","type":"g"},\
+		"90683":{"name":"g","type":"g"},\
+		"90684":{"name":"g","type":"g"},\
+		"90685":{"name":"g","type":"g"},\
+		"90686":{"name":"g","type":"g"},\
+		"90687":{"name":"g","type":"g"},\
+		"90688":{"name":"g","type":"g"},\
+		"90689":{"name":"g","type":"g"},\
+		"90690":{"name":"g","type":"g"},\
+		"90691":{"name":"g","type":"g"},\
+		"90692":{"name":"g","type":"g"},\
+		"90693":{"name":"g","type":"g"},\
+		"90694":{"name":"g","type":"g"},\
+		"90695":{"name":"g","type":"g"},\
+		"90696":{"name":"g","type":"g"},\
+		"90697":{"name":"g","type":"g"},\
+		"90698":{"name":"g","type":"g"},\
+		"90699":{"name":"g","type":"g"},\
+		"90700":{"name":"g","type":"g"},\
+		"90701":{"name":"g","type":"g"},\
+		"90702":{"name":"g","type":"g"},\
+		"90703":{"name":"g","type":"g"},\
+		"90704":{"name":"g","type":"g"},\
+		"90705":{"name":"g","type":"g"},\
+		"90706":{"name":"g","type":"g"},\
+		"90707":{"name":"g","type":"g"},\
+		"90708":{"name":"g","type":"g"},\
+		"90709":{"name":"g","type":"g"},\
+		"90710":{"name":"g","type":"g"},\
+		"90711":{"name":"g","type":"g"},\
+		"90712":{"name":"g","type":"g"},\
+		"90713":{"name":"g","type":"g"},\
+		"90714":{"name":"g","type":"g"},\
+		"90715":{"name":"g","type":"g"},\
+		"90717":{"name":"g","type":"g"},\
+		"90718":{"name":"g","type":"g"},\
+		"90719":{"name":"g","type":"g"},\
+		"90720":{"name":"g","type":"g"},\
+		"90721":{"name":"g","type":"g"},\
+		"90722":{"name":"g","type":"g"},\
+		"90723":{"name":"g","type":"g"},\
+		"90724":{"name":"g","type":"g"},\
+		"90725":{"name":"g","type":"g"},\
+		"90726":{"name":"g","type":"g"},\
+		"90727":{"name":"g","type":"g"},\
+		"90728":{"name":"g","type":"g"},\
+		"90729":{"name":"g","type":"g"},\
+		"90730":{"name":"g","type":"g"},\
+		"90731":{"name":"g","type":"g"},\
+		"90732":{"name":"g","type":"g"},\
+		"90733":{"name":"g","type":"g"},\
+		"90734":{"name":"g","type":"g"},\
+		"90735":{"name":"g","type":"g"},\
+		"90736":{"name":"g","type":"g"},\
+		"90737":{"name":"g","type":"g"},\
+		"90738":{"name":"g","type":"g"},\
+		"90739":{"name":"g","type":"g"},\
+		"90740":{"name":"g","type":"g"},\
+		"90741":{"name":"g","type":"g"},\
+		"90742":{"name":"g","type":"g"},\
+		"90743":{"name":"g","type":"g"},\
+		"90744":{"name":"g","type":"g"},\
+		"90745":{"name":"g","type":"g"},\
+		"90746":{"name":"g","type":"g"},\
+		"90747":{"name":"g","type":"g"},\
+		"90748":{"name":"g","type":"g"},\
+		"90749":{"name":"g","type":"g"},\
+		"90750":{"name":"g","type":"g"},\
+		"90751":{"name":"g","type":"g"},\
+		"90752":{"name":"g","type":"g"},\
+		"90753":{"name":"g","type":"g"},\
+		"90754":{"name":"g","type":"g"},\
+		"90755":{"name":"g","type":"g"},\
+		"90756":{"name":"g","type":"g"},\
+		"90757":{"name":"g","type":"g"},\
+		"90758":{"name":"g","type":"g"},\
+		"90759":{"name":"g","type":"g"},\
+		"90760":{"name":"g","type":"g"},\
+		"90761":{"name":"g","type":"g"},\
+		"90762":{"name":"g","type":"g"},\
+		"90763":{"name":"g","type":"g"},\
+		"90764":{"name":"g","type":"g"},\
+		"90765":{"name":"g","type":"g"},\
+		"90766":{"name":"g","type":"g"},\
+		"90767":{"name":"g","type":"g"},\
+		"90768":{"name":"g","type":"g"},\
+		"90769":{"name":"g","type":"g"},\
+		"90770":{"name":"g","type":"g"},\
+		"90771":{"name":"g","type":"g"},\
+		"90772":{"name":"g","type":"g"},\
+		"90773":{"name":"g","type":"g"},\
+		"90774":{"name":"g","type":"g"},\
+		"90775":{"name":"g","type":"g"},\
+		"90776":{"name":"g","type":"g"},\
+		"90777":{"name":"g","type":"g"},\
+		"90778":{"name":"g","type":"g"},\
+		"90779":{"name":"g","type":"g"},\
+		"90780":{"name":"g","type":"g"},\
+		"90781":{"name":"g","type":"g"},\
+		"90782":{"name":"g","type":"g"},\
+		"90783":{"name":"g","type":"g"},\
+		"90784":{"name":"g","type":"g"},\
+		"90785":{"name":"g","type":"g"},\
+		"90786":{"name":"g","type":"g"},\
+		"90787":{"name":"g","type":"g"},\
+		"90788":{"name":"g","type":"g"},\
+		"90789":{"name":"g","type":"g"},\
+		"90790":{"name":"g","type":"g"},\
+		"90791":{"name":"g","type":"g"},\
+		"90792":{"name":"g","type":"g"},\
+		"90793":{"name":"g","type":"g"},\
+		"90794":{"name":"g","type":"g"},\
+		"90795":{"name":"g","type":"g"},\
+		"90796":{"name":"g","type":"g"},\
+		"90797":{"name":"g","type":"g"},\
+		"90798":{"name":"g","type":"g"},\
+		"90799":{"name":"g","type":"g"},\
+		"90800":{"name":"g","type":"g"},\
+		"90801":{"name":"g","type":"g"},\
+		"90802":{"name":"g","type":"g"},\
+		"90806":{"name":"g","type":"g"},\
+		"90807":{"name":"g","type":"g"},\
+		"90808":{"name":"g","type":"g"},\
+		"90809":{"name":"g","type":"g"},\
+		"90810":{"name":"g","type":"g"},\
+		"90811":{"name":"g","type":"g"},\
+		"90812":{"name":"g","type":"g"},\
+		"90813":{"name":"g","type":"g"},\
+		"90814":{"name":"g","type":"g"},\
+		"90815":{"name":"g","type":"g"},\
+		"90816":{"name":"g","type":"g"},\
+		"90817":{"name":"g","type":"g"},\
+		"90818":{"name":"g","type":"g"},\
+		"90819":{"name":"g","type":"g"},\
+		"90820":{"name":"g","type":"g"},\
+		"90821":{"name":"g","type":"g"},\
+		"90822":{"name":"g","type":"g"},\
+		"90823":{"name":"g","type":"g"},\
+		"90824":{"name":"g","type":"g"},\
+		"90825":{"name":"g","type":"g"},\
+		"90826":{"name":"g","type":"g"},\
+		"90827":{"name":"g","type":"g"},\
+		"90828":{"name":"g","type":"g"},\
+		"90829":{"name":"g","type":"g"},\
+		"90830":{"name":"g","type":"g"},\
+		"90831":{"name":"g","type":"g"},\
+		"90832":{"name":"g","type":"g"},\
+		"90833":{"name":"g","type":"g"},\
+		"90834":{"name":"g","type":"g"},\
+		"90835":{"name":"g","type":"g"},\
+		"90836":{"name":"g","type":"g"},\
+		"90837":{"name":"g","type":"g"},\
+		"90838":{"name":"g","type":"g"},\
+		"90839":{"name":"g","type":"g"},\
+		"90840":{"name":"g","type":"g"},\
+		"90841":{"name":"g","type":"g"},\
+		"90842":{"name":"g","type":"g"},\
+		"90843":{"name":"g","type":"g"},\
+		"90844":{"name":"g","type":"g"},\
+		"90845":{"name":"g","type":"g"},\
+		"90846":{"name":"g","type":"g"},\
+		"90847":{"name":"g","type":"g"},\
+		"90848":{"name":"g","type":"g"},\
+		"90849":{"name":"g","type":"g"},\
+		"90850":{"name":"g","type":"g"},\
+		"90851":{"name":"g","type":"g"},\
+		"90852":{"name":"g","type":"g"},\
+		"90853":{"name":"g","type":"g"},\
+		"90854":{"name":"g","type":"g"},\
+		"90855":{"name":"g","type":"g"},\
+		"90856":{"name":"g","type":"g"},\
+		"90857":{"name":"g","type":"g"},\
+		"90858":{"name":"g","type":"g"},\
+		"90859":{"name":"g","type":"g"},\
+		"90860":{"name":"g","type":"g"},\
+		"90861":{"name":"g","type":"g"},\
+		"90862":{"name":"g","type":"g"},\
+		"90863":{"name":"g","type":"g"},\
+		"90864":{"name":"g","type":"g"},\
+		"90865":{"name":"g","type":"g"},\
+		"90866":{"name":"g","type":"g"},\
+		"90867":{"name":"g","type":"g"},\
+		"90868":{"name":"g","type":"g"},\
+		"90869":{"name":"g","type":"g"},\
+		"90870":{"name":"g","type":"g"},\
+		"90871":{"name":"g","type":"g"},\
+		"90872":{"name":"g","type":"g"},\
+		"90873":{"name":"g","type":"g"},\
+		"90874":{"name":"g","type":"g"},\
+		"90875":{"name":"g","type":"g"},\
+		"90876":{"name":"g","type":"g"},\
+		"90877":{"name":"g","type":"g"},\
+		"90878":{"name":"g","type":"g"},\
+		"90879":{"name":"g","type":"g"},\
+		"90880":{"name":"g","type":"g"},\
+		"90881":{"name":"g","type":"g"},\
+		"90882":{"name":"g","type":"g"},\
+		"90883":{"name":"g","type":"g"},\
+		"90884":{"name":"g","type":"g"},\
+		"90885":{"name":"g","type":"g"},\
+		"91702":{"name":"g","type":"g"},\
+		"91703":{"name":"g","type":"g"},\
+		"91704":{"name":"g","type":"g"},\
+		"91705":{"name":"g","type":"g"},\
+		"91706":{"name":"g","type":"g"},\
+		"91707":{"name":"g","type":"g"},\
+		"91708":{"name":"g","type":"g"},\
+		"91709":{"name":"g","type":"g"},\
+		"91710":{"name":"g","type":"g"},\
+		"91711":{"name":"g","type":"g"},\
+		"91712":{"name":"g","type":"g"},\
+		"91713":{"name":"g","type":"g"},\
+		"91714":{"name":"g","type":"g"},\
+		"91715":{"name":"g","type":"g"},\
+		"91716":{"name":"g","type":"g"},\
+		"91717":{"name":"g","type":"g"},\
+		"91718":{"name":"g","type":"g"},\
+		"91719":{"name":"g","type":"g"},\
+		"91720":{"name":"g","type":"g"},\
+		"91721":{"name":"g","type":"g"},\
+		"91722":{"name":"g","type":"g"},\
+		"91723":{"name":"g","type":"g"},\
+		"91724":{"name":"g","type":"g"}\
+		}';
+		alltagnames = JSON.parse(alltagnames)
+</script>
+<script>
+	var EOL = '<BR/>'
+</script>
+<script>
+
+	function calculate(){
+		var results = document.getElementById('results');
+		results.innerHTML = '...'
+		var tags = document.getElementById('tags');
+		tags.innerHTML = '...'
+
+		var myDD = document.getElementById('myDDField').value;
+		if( myDD.length==0 ){
+		   alert('Please enter a valid DueDate.');
+			return;
+		}
+
+		data = calc_weeks(new Date(myDD))
+		var s = ''
+		var t = ''
+		s = formatbasemsg(data)
+		if(data['oldduedate']==true ||
+			data['futureduedate']==true){
+			s += formaterrormsg(data)
+		}
+		else {
+			s += formatweeksmsg(data)
+			t += formattags(data)
+		}
+
+		results.innerHTML = s
+		tags.innerHTML = t
+	}
+	function formatbasemsg(data){
+		s = ''
+		s += 'Today\'s Date : ' + data.today.toLocaleDateString("en-US") + EOL
+		s += 'Due Date : ' + data.dd.toLocaleDateString("en-US") + EOL
+		s += 'Conception Date : ' + data.concept_date.toLocaleDateString("en-US") + EOL
+		s += EOL
+		return s
+	}
+	function formaterrormsg(data){
+		s = ''
+		if (data.oldduedate){
+			s += "Due Date in Past! Congratulations!"
+			return s
+		}
+		if (data.futureduedate){
+			s += "Conception Date in the Future! Good Luck!"
+			return s
+		}
+	}
+	function formatweeksmsg(data){
+		s = ''
+		s += 'You are ' + data.weekspreg + ' weeks and '
+				+ data.daysafterweekspreg + ' days pregnant' + EOL
+		s += 'You are ' + data.monthspreg + ' months pregnant and in trimester '
+				+ data.trimester_of_preg + ' of pregnancy' + EOL
+
+		s += 'You are in week ' + data.weekofpreg + ' of your pregnancy' + EOL
+		s += 'You are in month ' + data.monthspreg + ' of pregnancy and in trimester '
+				+ data.trimester_of_preg + ' of pregnancy' + EOL
+
+		return s
+	}
+	function formattags(data){
+		s = ''
+		s += 'Tags used for you ' + EOL
+		s += gettagname(data.weektag) + EOL
+		s += gettagname(data.monthtag) + EOL
+		s += gettagname(data.trimestertag) + EOL
+		s += gettagname(90262) + EOL
+
+		return s
+	}
+
+	function gettagname(tagid){
+		return alltagnames[tagid]['name']
+	}
+	function calc_week(week){
+		wtags = alltagsbyweek[week]
+		if(wtags == null)
+			return 'NoWeek'
+		ret = {}
+		ret['w'] = week
+		ret['wtag'] = wtags['w'+week]
+		return ret
+	}
+	function calc_month(week){
+		wtags = alltagsbyweek[week]
+		if(wtags == null)
+			return 'NoMonth'
+		ret = {}
+		ret['m'] = wtags['m']
+		ret['mtag'] = wtags['m'+wtags['m']]
+		return ret
+	}
+	function calc_trimester(week){
+		wtags = alltagsbyweek[week]
+		if(wtags == null)
+			return 'NoTrimester'
+		ret = {}
+		ret['t'] = wtags['t']
+		ret['ttag'] = wtags['t'+wtags['t']]
+		return ret
+	}
+	function default_date(){
+		today_date = new Date(Date.now());
+		due_date = new Date(today_date);
+		due_date.setDate(today_date.getDate() + 200);
+		return due_date.toLocaleDateString("en-US");
+	}
+	function calc_weeks(due_date){
+		var r = {}
+		today_date = new Date(Date.now())
+		//due_date = new Date('2016-06-13')
+		concept_date = new Date(due_date);
+		concept_date.setDate(due_date.getDate() - 266);
+		date_4_calc = new Date(due_date);
+		date_4_calc.setDate(due_date.getDate() - 280);
+
+		r['dd'] = due_date
+		r['today'] = today_date
+		r['concept_date'] = concept_date
+
+		if (due_date < today_date){
+			r['oldduedate'] = true
+			return r
+		}
+		if (concept_date > today_date){
+			r['futureduedate'] = true
+			return r
+		}
+
+		diff = today_date - date_4_calc
+		d = diff/1000/60/60/24
+		w = Math.floor(d/7)
+		wd = Math.round(d%7)
+		wop = Math.ceil(d/7)
+		w_info = calc_week(w)
+		m_info = calc_month(w)
+		t_info = calc_trimester(w)
+
+		r['weekspreg'] = w
+		r['daysafterweekspreg'] = wd
+		r['weekofpreg'] = wop
+		r['monthspreg'] = m_info['m']
+		r['trimester_of_preg'] = t_info['t']
+		r['weektag'] = w_info['wtag']
+		r['weektagname'] = w_info['wtagname']
+		r['monthtag'] = m_info['mtag']
+		r['monthtagname'] = m_info['mtagname']
+		r['trimestertag'] = t_info['ttag']
+		r['trimestertagname'] = t_info['ttagname']
+
+		return r;
+	}
+	function addLoadEvent(func) {
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function') {
+			window.onload = func;
+		} else {
+			window.onload = function() {
+				if (oldonload) {
+					oldonload();
+				}
+				func();
+			}
+		}
+	}
+	addLoadEvent(function(){
+		dd = document.getElementById('myDDField');
+		dd.value = default_date()
+	})
+</script>
+<body>
+	<h1 id="title">The Computer</h1>
+	<input type="text" id="myDDField" value="06/21/2016"/>
+	<input type="submit" id="byBtn" value="Calculate" onclick="calculate()"/>
+	<hr>
+	<h2 id="results">...</h2>
+	<hr>
+	<h3 id="tags">...</h3>
+</body>
+</html>
+
